@@ -28,7 +28,7 @@ shekinah-floral/
     animations.css    Keyframes & motion utilities
     admin.css         Admin dashboard design system (light + dark)
   js/
-    main.js           Nav, preloader, petal canvas, custom cursor, counters, reveals, WhatsApp float
+    main.js           Nav, preloader, petal canvas, counters, reveals, WhatsApp float
     animations.js     GSAP ScrollTrigger layer, hero text choreography, tilt, before/after
     gallery.js        Gallery filters (FLIP) + lightbox
     booking.js        Multi-step form, validation, AI quote generator, package builder

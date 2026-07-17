@@ -221,6 +221,7 @@ input, select, textarea { font-family: inherit; font-size: 0.92rem; }
 .a-input, .a-select {
   width: 100%; padding: 0.62rem 0.9rem; border-radius: 10px;
   border: 1px solid var(--a-border); background: var(--a-surface); color: var(--a-ink);
+  font-size: 1rem;
   transition: border-color 0.25s, box-shadow 0.25s;
 }
 .a-input:focus, .a-select:focus { outline: none; border-color: var(--a-gold); box-shadow: 0 0 0 3px rgba(184, 134, 11, 0.14); }

@@ -1,7 +1,7 @@
 /* ============================================================
    SHEKINAH FLORAL DECOR — main.js
    Shared behaviour: preloader, nav, reveals, counters,
-   petal canvas, custom cursor, floats, page transitions.
+   petal canvas, floats, page transitions.
    ============================================================ */
 (function () {
   'use strict';
@@ -129,9 +129,10 @@
     track.innerHTML += track.innerHTML;
   });
 
-  /* ---------- Petal-fall canvas ---------- */
+  /* ---------- Petal-fall canvas (desktop / tablet only — skipped on phones for smooth scroll) ---------- */
   var canvas = document.getElementById('petal-canvas');
-  if (canvas && !prefersReduced) {
+  var isNarrow = window.matchMedia('(max-width: 640px)').matches;
+  if (canvas && !prefersReduced && !isNarrow) {
     var ctx = canvas.getContext('2d');
     var petals = [];
     var W, H;
@@ -200,51 +201,6 @@
       });
     });
     heroIO.observe(canvas.parentElement);
-  }
-
-  /* ---------- Custom cursor + magnetic buttons (fine pointers only) ---------- */
-  var fine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-  if (fine && !prefersReduced) {
-    document.body.classList.add('has-cursor');
-    var dot = document.createElement('div');
-    dot.className = 'cursor-dot';
-    var ring = document.createElement('div');
-    ring.className = 'cursor-ring';
-    document.body.appendChild(dot);
-    document.body.appendChild(ring);
-
-    var mx = -100, my = -100, rx = -100, ry = -100;
-    document.addEventListener('mousemove', function (e) { mx = e.clientX; my = e.clientY; });
-    (function cursorLoop() {
-      rx += (mx - rx) * 0.16;
-      ry += (my - ry) * 0.16;
-      dot.style.transform = 'translate(' + (mx - 3.5) + 'px,' + (my - 3.5) + 'px)';
-      ring.style.transform = 'translate(' + (rx - 19) + 'px,' + (ry - 19) + 'px)';
-      requestAnimationFrame(cursorLoop);
-    })();
-
-    document.addEventListener('mouseover', function (e) {
-      if (e.target.closest('a, button, .gallery-item, input, select, textarea, label')) ring.classList.add('is-hovering');
-    });
-    document.addEventListener('mouseout', function (e) {
-      if (e.target.closest('a, button, .gallery-item, input, select, textarea, label')) ring.classList.remove('is-hovering');
-    });
-
-    // Magnetic pull
-    document.querySelectorAll('[data-magnetic]').forEach(function (el) {
-      var strength = 26;
-      el.addEventListener('mousemove', function (e) {
-        var r = el.getBoundingClientRect();
-        var dx = e.clientX - (r.left + r.width / 2);
-        var dy = e.clientY - (r.top + r.height / 2);
-        el.style.transform = 'translate(' + (dx / r.width) * strength + 'px,' + (dy / r.height) * strength + 'px)';
-      });
-      el.addEventListener('mouseleave', function () {
-        el.style.transition = 'transform 0.5s cubic-bezier(0.22,1,0.36,1)';
-        el.style.transform = '';
-        window.setTimeout(function () { el.style.transition = ''; }, 500);
-      });
-    });
   }
 
   /* ---------- WhatsApp float (injected on every page) ---------- */

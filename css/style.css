@@ -65,7 +65,10 @@ body {
   background: var(--warm-white);
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
+  -webkit-tap-highlight-color: transparent;
+  text-rendering: optimizeLegibility;
 }
+a, button, [role="button"] { touch-action: manipulation; }
 
 img { max-width: 100%; display: block; }
 a { color: inherit; text-decoration: none; }
@@ -885,7 +888,7 @@ h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 700; line-height
 .newsletter-form { display: flex; margin-top: 1rem; border-radius: 999px; overflow: hidden; border: 1px solid var(--glass-border); background: var(--glass); backdrop-filter: blur(10px); }
 .newsletter-form input {
   flex: 1; min-width: 0; background: transparent; border: none; padding: 0.85rem 1.3rem;
-  color: var(--cream); font-size: 0.9rem;
+  color: var(--cream); font-size: 1rem;
 }
 .newsletter-form input::placeholder { color: var(--sage); }
 .newsletter-form input:focus { outline: none; }
@@ -1002,7 +1005,7 @@ h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 700; line-height
 .chat-input { display: flex; gap: 0.6rem; padding: 0.9rem 1.1rem; border-top: 1px solid rgba(184, 134, 11, 0.18); background: var(--warm-white); }
 .chat-input input {
   flex: 1; min-width: 0; border: none; background: var(--cream); border-radius: 999px;
-  padding: 0.75rem 1.2rem; font-size: 0.9rem; color: var(--charcoal);
+  padding: 0.75rem 1.2rem; font-size: 1rem; color: var(--charcoal);
 }
 .chat-input input:focus { outline: 2px solid rgba(184, 134, 11, 0.35); }
 .chat-input button {
@@ -1014,25 +1017,6 @@ h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 700; line-height
 .chat-input button:hover { transform: scale(1.08); }
 .chat-input button svg { width: 18px; height: 18px; }
 .chat-powered { text-align: center; font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-soft); padding: 0 0 0.7rem; background: var(--warm-white); }
-
-/* ---------- Custom cursor (desktop, fine pointers) ---------- */
-.cursor-dot, .cursor-ring { display: none; }
-@media (hover: hover) and (pointer: fine) {
-  .cursor-dot {
-    display: block; position: fixed; z-index: 5000; pointer-events: none;
-    width: 7px; height: 7px; border-radius: 50%; background: var(--gold);
-    transform: translate(-50%, -50%); top: 0; left: 0;
-  }
-  .cursor-ring {
-    display: block; position: fixed; z-index: 4999; pointer-events: none;
-    width: 38px; height: 38px; border-radius: 50%;
-    border: 1.5px solid rgba(184, 134, 11, 0.55);
-    transform: translate(-50%, -50%); top: 0; left: 0;
-    transition: width 0.3s ease, height 0.3s ease, border-color 0.3s ease, background 0.3s ease;
-  }
-  .cursor-ring.is-hovering { width: 62px; height: 62px; background: rgba(184, 134, 11, 0.08); border-color: var(--gold); }
-  body.has-cursor, body.has-cursor a, body.has-cursor button { cursor: none; }
-}
 
 /* ---------- Page hero (inner pages) ---------- */
 .page-hero {
